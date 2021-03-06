@@ -26,7 +26,7 @@ def submit_form():
         return "Error sumitting form, please try again"
 
 def write_to_csv(data):
-    with open("database.csv", mode="a", newline="") as database:
+    with open("./database.csv", mode="a", newline="") as database:
         email = data["email"]
         name = data["name"]
         message = data["message"]
