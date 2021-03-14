@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 import csv
+from twilio.rest import Client
 
 app = Flask(__name__)
 
@@ -19,6 +20,7 @@ def submit_form():
             data = request.form.to_dict()
             print(data)
             write_to_csv(data)
+            send_sms(data)
             return redirect('/thankyou')
         except:
             return "did not save to database"
@@ -32,3 +34,14 @@ def write_to_csv(data):
         message = data["message"]
         csv_writer = csv.writer(database, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow([email, name, message])
+
+def send_sms(data):
+    account_sid = 'account sid here'
+    auth_token = 'auth token here'
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+             from_='from number here',
+             body="Name: " + data["name"] + " Email: " + data["email"] + " - " + data["message"],
+             to='to number here'
+             )
+    print(message.sid)
