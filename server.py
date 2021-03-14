@@ -36,8 +36,8 @@ def write_to_csv(data):
         csv_writer.writerow([email, name, message])
 
 def send_sms(data):
-    account_sid = 'account sid here'
-    auth_token = 'auth token here'
+    account_sid = 'Account sid here'
+    auth_token = 'Auth token here'
     client = Client(account_sid, auth_token)
     message = client.messages.create(
              from_='from number here',
