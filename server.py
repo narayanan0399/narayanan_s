@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, request, redirect
 import csv
+import os
 from twilio.rest import Client
+from twilio.http.http_client import TwilioHttpClient
 
 app = Flask(__name__)
 
@@ -36,12 +38,13 @@ def write_to_csv(data):
         csv_writer.writerow([email, name, message])
 
 def send_sms(data):
-    account_sid = 'Account sid here'
-    auth_token = 'Auth token here'
-    client = Client(account_sid, auth_token)
+    proxy_client = TwilioHttpClient(proxy={'http': os.environ['http_proxy'], 'https': os.environ['https_proxy']})
+    account_sid = 'account_sid'
+    auth_token = 'auth_token'
+    client = Client(account_sid, auth_token, http_client=proxy_client)
     message = client.messages.create(
-             from_='from number here',
+             from_='from_number',
              body="Name: " + data["name"] + " Email: " + data["email"] + " - " + data["message"],
-             to='to number here'
+             to='to_number'
              )
     print(message.sid)
