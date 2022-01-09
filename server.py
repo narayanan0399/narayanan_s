@@ -1,10 +1,23 @@
 from flask import Flask, render_template, url_for, request, redirect
+from flask_sqlalchemy import SQLAlchemy
 import csv
 import os
 from twilio.rest import Client
 from twilio.http.http_client import TwilioHttpClient
 
 app = Flask(__name__)
+
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
+    username="narayanans",
+    password="Pythonsql",
+    hostname="narayanans.mysql.pythonanywhere-services.com",
+    databasename="narayanans$narayanswebsite",
+)
+app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
 
 @app.route('/')
 def homepage():
