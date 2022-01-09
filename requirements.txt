@@ -7,6 +7,7 @@ click==7.1.2
 colorama==0.4.3
 distlib==0.3.1
 filelock==3.0.12
+Flask-SQLAlchemy==2.5.1
 identify==1.4.28
 idna==2.10
 isort==4.3.21
