@@ -19,6 +19,15 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+class ContactInfo(db.Model):
+
+    __tablename__ = "contactinfo"
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(60))
+    name = db.Column(db.String(60))
+    message = db.Column(db.String(8192))
+
 @app.route('/')
 def homepage():
     return render_template('index.html')
@@ -61,3 +70,9 @@ def send_sms(data):
              to='to_number'
              )
     print(message.sid)
+
+def write_to_db(data):
+    email = data["email"]
+    name = data["name"]
+    message = data["message"]
+    / /db.session.add(email)
