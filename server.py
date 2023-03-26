@@ -75,4 +75,4 @@ def write_to_db(data):
     email = data["email"]
     name = data["name"]
     message = data["message"]
-    / /db.session.add(email)
+    # db.session.add(email)
