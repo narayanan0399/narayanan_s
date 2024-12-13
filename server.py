@@ -27,7 +27,7 @@ def submit_form():
         except:
             return "did not save to database"
     else:
-        return "Error sumitting form, please try again"
+        return "Error submitting form, please try again"
 
 def write_to_csv(data):
     with open("./database.csv", mode="a", newline="") as database:
