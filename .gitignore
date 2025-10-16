@@ -127,3 +127,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# macOS system files
+**/.DS_Store
+
+# Ignore bin directory and its contents
+/bin/
+
+# Ignore pyconfig.h files wherever they are located
+**/pyvenv.cfg
+
+info.txt
